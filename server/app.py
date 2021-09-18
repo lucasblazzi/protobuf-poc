@@ -38,13 +38,15 @@ def setup():
 class MetricsServicer(pbuff_metric_grpc.MetricsServicer):
     def GetMetrics(self, request, context):
         print("Requested")
-        metric_request = pbuff_metric.MetricsRequest()
-        metric_request.ParseFromString(request.read())
-        request = MessageToDict(metric_request)
+        print(request)
+        # metric_request = pbuff_metric.MetricsRequest()
+        # metric_request.ParseFromString(request.read())
+        request = MessageToDict(request)
         print(request)
         result = Metrics(request).get_metric()
         response = response_builder(request, result)
-        return response.SerializeToString()
+        return response
+        # return response.SerializeToString()
 
 
 setup()

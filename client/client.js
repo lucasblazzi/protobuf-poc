@@ -8,7 +8,9 @@ function main() {
   );
 
   const metricsRequest = new messages.MetricsRequest();
-  metricsRequest.setTicker("BPAC11.SA");
+  metricsRequest.setTicker("BPAC11");
+  metricsRequest.setStartdate(1600392413);
+  metricsRequest.setEnddate(1631928413);
   metricsRequest.setMetric(1);
   console.log(metricsRequest);
 
@@ -16,7 +18,8 @@ function main() {
     if (err) {
       console.log('this thing broke!', err);
     } else {
-      console.log('response from python:', response.getMessage());
+      console.log(response);
+      console.log('response from python:', response);
     }
   })
 }
