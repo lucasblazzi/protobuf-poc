@@ -1,0 +1,43 @@
+ syntax = "proto3";
+
+service Metrics {
+  rpc GetMetrics(MetricsRequest) returns (MetricsResponse);
+  rpc GetPrices(PricesRequest) returns (PricesResponse);
+}
+ 
+enum MetricTypes {
+  close = 0;
+  returns = 1;
+  cumulative_return = 2;
+  drawdown = 3;
+}
+
+message Value {
+  int32 x = 1;
+  float y = 2;
+}
+
+message MetricsRequest {
+  string ticker = 1;
+  int32 startDate = 2;
+  int32 endDate = 3;
+  MetricTypes metric = 4;
+}
+
+message MetricsResponse {
+  string ticker = 1;
+  string metric = 2;
+  string startDate = 3;
+  string endDate = 4;
+  repeated Value values = 5;
+}
+
+message PricesRequest {
+  string ticker = 1;
+  int32 startDate = 2;
+  int32 endDate = 3;
+}
+
+message PricesResponse {
+  repeated Value values = 1;
+}
