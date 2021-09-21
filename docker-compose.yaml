@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+
+    visualizer:
+        build:
+            context: .
+            dockerfile: visualizer/Dockerfile
+        environment:
+            METRICS_HOST: metrics
+        image: visualizer
+        networks:
+            - microservices
+        ports:
+            - 5000:5000
+
+    prices:
+        build:
+            context: .
+            dockerfile: prices/Dockerfile
+        image: prices
+        networks:
+            - microservices
+
+    metrics:
+        build:
+            context: .
+            dockerfile: metrics/Dockerfile
+        environment:
+            PRICES_HOST: prices
+        image: metrics
+        networks:
+            - microservices
+
+networks:
+    microservices:
