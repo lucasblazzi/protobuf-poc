@@ -5,7 +5,6 @@ from datetime import datetime
 import yfinance as yf
 import metrics_pb2 as pbuff_metric
 import metrics_pb2_grpc as pbuff_metric_grpc
-from google.protobuf.json_format import MessageToDict
 
 
 def get_date(ts):
@@ -15,6 +14,8 @@ def get_date(ts):
 def get_prices(request):
     ticker = yf.Ticker(f"{request.ticker}.SA")
     historic = ticker.history(start=get_date(request.startDate), end=get_date(request.endDate))
+    print("______________________________________")
+    print(f"RAW PRICES RESULT \n{historic}")
     return historic.to_dict()
 
 
@@ -39,7 +40,11 @@ def setup():
 class MetricsServicer(pbuff_metric_grpc.MetricsServicer):
     def GetPrices(self, request, context):
         result = get_prices(request)
+        print("______________________________________")
+        print(f"RAW PRICES RESULT \n{result}")
         response = response_builder(result)
+        print("______________________________________")
+        print(f"RETURNING PRICES \n{result}")
         return response
 
 setup()

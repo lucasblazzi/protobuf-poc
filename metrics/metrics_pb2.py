@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rmetrics.proto\"b\n\x0eMetricsRequest\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x11\n\tstartDate\x18\x02 \x01(\x05\x12\x0f\n\x07\x65ndDate\x18\x03 \x01(\x05\x12\x1c\n\x06metric\x18\x04 \x01(\x0e\x32\x0c.MetricTypes\"\x1d\n\x05Value\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x02\"m\n\x0fMetricsResponse\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x0e\n\x06metric\x18\x02 \x01(\t\x12\x11\n\tstartDate\x18\x03 \x01(\t\x12\x0f\n\x07\x65ndDate\x18\x04 \x01(\t\x12\x16\n\x06values\x18\x05 \x03(\x0b\x32\x06.Value*J\n\x0bMetricTypes\x12\t\n\x05\x63lose\x10\x00\x12\x0b\n\x07returns\x10\x01\x12\x15\n\x11\x63umulative_return\x10\x02\x12\x0c\n\x08\x64rawdown\x10\x03\x32:\n\x07Metrics\x12/\n\nGetMetrics\x12\x0f.MetricsRequest\x1a\x10.MetricsResponseb\x06proto3'
+  serialized_pb=b'\n\rmetrics.proto\"\x1d\n\x05Value\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x02\"b\n\x0eMetricsRequest\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x11\n\tstartDate\x18\x02 \x01(\x05\x12\x0f\n\x07\x65ndDate\x18\x03 \x01(\x05\x12\x1c\n\x06metric\x18\x04 \x01(\x0e\x32\x0c.MetricTypes\"m\n\x0fMetricsResponse\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x0e\n\x06metric\x18\x02 \x01(\t\x12\x11\n\tstartDate\x18\x03 \x01(\t\x12\x0f\n\x07\x65ndDate\x18\x04 \x01(\t\x12\x16\n\x06values\x18\x05 \x03(\x0b\x32\x06.Value\"C\n\rPricesRequest\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x11\n\tstartDate\x18\x02 \x01(\x05\x12\x0f\n\x07\x65ndDate\x18\x03 \x01(\x05\"(\n\x0ePricesResponse\x12\x16\n\x06values\x18\x01 \x03(\x0b\x32\x06.Value*J\n\x0bMetricTypes\x12\t\n\x05\x63lose\x10\x00\x12\x0b\n\x07returns\x10\x01\x12\x15\n\x11\x63umulative_return\x10\x02\x12\x0c\n\x08\x64rawdown\x10\x03\x32h\n\x07Metrics\x12/\n\nGetMetrics\x12\x0f.MetricsRequest\x1a\x10.MetricsResponse\x12,\n\tGetPrices\x12\x0e.PricesRequest\x1a\x0f.PricesResponseb\x06proto3'
 )
 
 _METRICTYPES = _descriptor.EnumDescriptor(
@@ -53,8 +53,8 @@ _METRICTYPES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=259,
-  serialized_end=333,
+  serialized_start=370,
+  serialized_end=444,
 )
 _sym_db.RegisterEnumDescriptor(_METRICTYPES)
 
@@ -64,6 +64,45 @@ returns = 1
 cumulative_return = 2
 drawdown = 3
 
+
+
+_VALUE = _descriptor.Descriptor(
+  name='Value',
+  full_name='Value',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='x', full_name='Value.x', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='y', full_name='Value.y', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=17,
+  serialized_end=46,
+)
 
 
 _METRICSREQUEST = _descriptor.Descriptor(
@@ -114,46 +153,7 @@ _METRICSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17,
-  serialized_end=115,
-)
-
-
-_VALUE = _descriptor.Descriptor(
-  name='Value',
-  full_name='Value',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='x', full_name='Value.x', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='y', full_name='Value.y', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=117,
+  serialized_start=48,
   serialized_end=146,
 )
 
@@ -217,20 +217,94 @@ _METRICSRESPONSE = _descriptor.Descriptor(
   serialized_end=257,
 )
 
+
+_PRICESREQUEST = _descriptor.Descriptor(
+  name='PricesRequest',
+  full_name='PricesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ticker', full_name='PricesRequest.ticker', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='startDate', full_name='PricesRequest.startDate', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='endDate', full_name='PricesRequest.endDate', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=259,
+  serialized_end=326,
+)
+
+
+_PRICESRESPONSE = _descriptor.Descriptor(
+  name='PricesResponse',
+  full_name='PricesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='PricesResponse.values', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=328,
+  serialized_end=368,
+)
+
 _METRICSREQUEST.fields_by_name['metric'].enum_type = _METRICTYPES
 _METRICSRESPONSE.fields_by_name['values'].message_type = _VALUE
-DESCRIPTOR.message_types_by_name['MetricsRequest'] = _METRICSREQUEST
+_PRICESRESPONSE.fields_by_name['values'].message_type = _VALUE
 DESCRIPTOR.message_types_by_name['Value'] = _VALUE
+DESCRIPTOR.message_types_by_name['MetricsRequest'] = _METRICSREQUEST
 DESCRIPTOR.message_types_by_name['MetricsResponse'] = _METRICSRESPONSE
+DESCRIPTOR.message_types_by_name['PricesRequest'] = _PRICESREQUEST
+DESCRIPTOR.message_types_by_name['PricesResponse'] = _PRICESRESPONSE
 DESCRIPTOR.enum_types_by_name['MetricTypes'] = _METRICTYPES
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-MetricsRequest = _reflection.GeneratedProtocolMessageType('MetricsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _METRICSREQUEST,
-  '__module__' : 'metrics_pb2'
-  # @@protoc_insertion_point(class_scope:MetricsRequest)
-  })
-_sym_db.RegisterMessage(MetricsRequest)
 
 Value = _reflection.GeneratedProtocolMessageType('Value', (_message.Message,), {
   'DESCRIPTOR' : _VALUE,
@@ -239,12 +313,33 @@ Value = _reflection.GeneratedProtocolMessageType('Value', (_message.Message,), {
   })
 _sym_db.RegisterMessage(Value)
 
+MetricsRequest = _reflection.GeneratedProtocolMessageType('MetricsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _METRICSREQUEST,
+  '__module__' : 'metrics_pb2'
+  # @@protoc_insertion_point(class_scope:MetricsRequest)
+  })
+_sym_db.RegisterMessage(MetricsRequest)
+
 MetricsResponse = _reflection.GeneratedProtocolMessageType('MetricsResponse', (_message.Message,), {
   'DESCRIPTOR' : _METRICSRESPONSE,
   '__module__' : 'metrics_pb2'
   # @@protoc_insertion_point(class_scope:MetricsResponse)
   })
 _sym_db.RegisterMessage(MetricsResponse)
+
+PricesRequest = _reflection.GeneratedProtocolMessageType('PricesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PRICESREQUEST,
+  '__module__' : 'metrics_pb2'
+  # @@protoc_insertion_point(class_scope:PricesRequest)
+  })
+_sym_db.RegisterMessage(PricesRequest)
+
+PricesResponse = _reflection.GeneratedProtocolMessageType('PricesResponse', (_message.Message,), {
+  'DESCRIPTOR' : _PRICESRESPONSE,
+  '__module__' : 'metrics_pb2'
+  # @@protoc_insertion_point(class_scope:PricesResponse)
+  })
+_sym_db.RegisterMessage(PricesResponse)
 
 
 
@@ -255,8 +350,8 @@ _METRICS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=335,
-  serialized_end=393,
+  serialized_start=446,
+  serialized_end=550,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetMetrics',
@@ -265,6 +360,16 @@ _METRICS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_METRICSREQUEST,
     output_type=_METRICSRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetPrices',
+    full_name='Metrics.GetPrices',
+    index=1,
+    containing_service=None,
+    input_type=_PRICESREQUEST,
+    output_type=_PRICESRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
