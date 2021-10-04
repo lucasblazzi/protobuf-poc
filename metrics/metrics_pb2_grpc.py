@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import protobufpy.metrics_pb2 as metrics__pb2
+import metrics_pb2 as metrics__pb2
 
 
 class MetricsStub(object):
@@ -19,12 +19,23 @@ class MetricsStub(object):
                 request_serializer=metrics__pb2.MetricsRequest.SerializeToString,
                 response_deserializer=metrics__pb2.MetricsResponse.FromString,
                 )
+        self.GetPrices = channel.unary_unary(
+                '/Metrics/GetPrices',
+                request_serializer=metrics__pb2.PricesRequest.SerializeToString,
+                response_deserializer=metrics__pb2.PricesResponse.FromString,
+                )
 
 
 class MetricsServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def GetMetrics(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetPrices(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_MetricsServicer_to_server(servicer, server):
                     servicer.GetMetrics,
                     request_deserializer=metrics__pb2.MetricsRequest.FromString,
                     response_serializer=metrics__pb2.MetricsResponse.SerializeToString,
+            ),
+            'GetPrices': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPrices,
+                    request_deserializer=metrics__pb2.PricesRequest.FromString,
+                    response_serializer=metrics__pb2.PricesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class Metrics(object):
         return grpc.experimental.unary_unary(request, target, '/Metrics/GetMetrics',
             metrics__pb2.MetricsRequest.SerializeToString,
             metrics__pb2.MetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetPrices(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Metrics/GetPrices',
+            metrics__pb2.PricesRequest.SerializeToString,
+            metrics__pb2.PricesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

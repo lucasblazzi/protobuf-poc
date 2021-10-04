@@ -13,7 +13,7 @@ import pandas as pd
 
 
 prices_host = os.getenv("PRICES_HOST", "localhost")
-channel = grpc.insecure_channel(f"{prices_host}:777")
+channel = grpc.insecure_channel(f"[::]:777")
 client = MetricsStub(channel)
 
 
@@ -22,6 +22,8 @@ def get_date(ts):
 
 
 def response_builder(request, result):
+    print("______________________________________")
+    print(f"RAW CALCULATED METRICS  \n{result}")
     metric_response = pbuff_metric.MetricsResponse()
     metric_response.startDate = get_date(list(result.keys())[0])
     metric_response.endDate = get_date(list(result.keys())[-1])
@@ -37,7 +39,11 @@ def response_builder(request, result):
 def get_prices(request):
     prices_request = PricesRequest(
         ticker=request.ticker, startDate=request.startDate, endDate=request.endDate)
+    print("______________________________________")
+    print(f"REQUESTING PRICES \n{prices_request}")
     prices_response = client.GetPrices(prices_request)
+    print("______________________________________")
+    print(f"PRICES RECEIVED \n{prices_response}")
     return pd.DataFrame(MessageToDict(prices_response)["values"]).rename(columns={"y": "Close"}).set_index("x")
 
 
@@ -56,6 +62,8 @@ class MetricsServicer(pbuff_metric_grpc.MetricsServicer):
         request = MessageToDict(request)
         result = Metrics(request).get_metric(data)
         response = response_builder(request, result)
+        print("______________________________________")
+        print(f"RETURNING METRICS  \n{response}")
         return response
 
 setup()

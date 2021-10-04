@@ -1,9 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import grpc
 import json
 import plotly
 import plotly.graph_objects as go
 from datetime import datetime
+import time
 from metrics_pb2 import MetricsRequest, MetricTypes
 from metrics_pb2_grpc import MetricsStub
 import os
@@ -13,6 +14,10 @@ metrics_host = os.getenv("METRICS_HOST", "localhost")
 app = Flask(__name__)
 channel = grpc.insecure_channel(f"{metrics_host}:666")
 client = MetricsStub(channel)
+
+
+def get_unix_time(date):
+    return int(time.mktime(datetime.strptime(date, "%d-%m-%Y").timetuple()))
 
 
 def build_graph(metrics):
@@ -28,11 +33,20 @@ def build_graph(metrics):
     return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
 
-@app.route("/")
-def load_metric():
+@app.route("/<ticker>/<start_date>/<end_date>")
+def load_metric(ticker="BPAC11", start_date=1600392413, end_date=1631928413):
+    start_date = get_unix_time(start_date)
+    end_date = get_unix_time(end_date)
+
+    app.logger.error(start_date)
+    app.logger.error(end_date)
+    app.logger.error(ticker)
     metric_request = MetricsRequest(
-        ticker="BPAC11", startDate=1600392413, endDate=1631928413, metric=MetricTypes.cumulative_return
+        ticker=ticker, startDate=start_date, endDate=end_date, metric=MetricTypes.cumulative_return
     )
+    # metric_request = MetricsRequest(
+    #     ticker="BPAC11", startDate=1600392413, endDate=1631928413, metric=MetricTypes.cumulative_return
+    # )
 
     metrics_response = client.GetMetrics(metric_request)
     graph = build_graph(metrics_response.values)
