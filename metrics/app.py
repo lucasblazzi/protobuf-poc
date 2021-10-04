@@ -13,7 +13,7 @@ import pandas as pd
 
 
 prices_host = os.getenv("PRICES_HOST", "localhost")
-channel = grpc.insecure_channel(f"{prices_host}:777")
+channel = grpc.insecure_channel(f"192.168.15.25:777")
 client = MetricsStub(channel)
 
 
