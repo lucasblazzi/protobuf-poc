@@ -12,9 +12,13 @@ from google.protobuf.json_format import MessageToDict
 import pandas as pd
 
 
-prices_host = os.getenv("PRICES_HOST", "localhost")
-channel = grpc.insecure_channel(f"{prices_host}:777")
-client = MetricsStub(channel)
+try:
+    prices_host = os.getenv("PRICES_HOST", "localhost")
+    channel = grpc.insecure_channel(f"{prices_host}:777")
+    client = MetricsStub(channel)
+except Exception as e:
+    print(f"Host {prices_host}:777 not found")
+    raise e
 
 
 def get_date(ts):
